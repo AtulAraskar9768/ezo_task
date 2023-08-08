@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row d-flex justify-content-center align-items-center vh-100">
+        <div class="col-md-12 ">
+            <h1>Current Available Denomination in Machine</h1>
+            <table class="table table-striped"> 
+                <tbody>
+                    <tr *ngFor="let item of config.atmConfig; let i =index">
+                        <th>{{item.type}}</th>
+                        <th>{{item.totalNumber}}</th>
+                        <th>|</th>
+                        <th>
+                            <input type="number" placeholder="0" min="0" name="initialNumber"
+                                [(ngModel)]="item.initialNumber" class="form-control"
+                                (ngModelChange)="onChangeValue($event,i)" />
+
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>{{config.totalAmmount}}</th>
+                        <th>|</th>
+                        <th class="text-right">
+                            <button class="btn btn-primary" (click)="depositCash()">Deposit</button>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            <!-- withdraw money -->
+            <div class="d-flex mt-1">
+                <input type="number" class="form-control" min="0" name="withdrawaAmmount"
+                    placeholder="Enter amount for withdrawal" [(ngModel)]="config.withDrawAmmount" />
+                <button type="button" class="ml-2 btn btn-success" (click)="withdrawAmmount()">
+                    Withdrawal
+                </button>
+            </div>
+            <hr />
+            <!-- logs section -->
+            <div>
+                <h3>Logs</h3>
+                <div class="alert" *ngFor="let item of config.logs" role="alert" [ngClass]="{
+                    'alert-success': item.type === 'deposit',
+                    'alert-danger': item.type === 'failed',
+                    'alert-info': item.type === 'withdraw_success'
+                  }">
+                    <div class="d-flex flex-column">
+                        <span>{{item.message}}</span>
+                        <span>{{item.time}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<cdk-virtual-scroll-viewport appendOnly itemSize="40" class="prodcut-wrapper">
+  <div class="row mt-3 ">
+    <div class="col-md-3 mb-3 example-item" *cdkVirtualFor="let item of productList">
+      <div class="card">
+        <img [src]="item.url" class="img-fluid product-img" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ item.itemName }}</h5>
+          <p class="card-text">
+            {{ item.itemPrice | currency : "USD" : "symbol" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</cdk-virtual-scroll-viewport>
